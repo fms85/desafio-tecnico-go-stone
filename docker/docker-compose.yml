@@ -1,0 +1,26 @@
+version: "3"
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - 8080:80
+    environment:
+      APP_ENV: local
+      HTTP_ADDR: 80
+      DB_CONNECTION_WRITE: postgres://postgres:postgres@postgres:5432/postgres
+      DB_CONNECTION_READ: postgres://postgres:postgres@postgres:5432/postgres
+      JWT_SECRET: 2aa5b62a718429b0645dc1be1bcac023821181859a181408b59c77d7c07d5349
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:
