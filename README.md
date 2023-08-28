@@ -10,7 +10,7 @@ To run the application, you need to have Docker installed on your system. The en
 
 To start the application, run the following command:
 
-    docker-compose -f docker/docker-compose.yml up --build
+    docker-compose -f docker/docker-compose.yml up
     
 This will build and launch the application in a Docker container.
 
