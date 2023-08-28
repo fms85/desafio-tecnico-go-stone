@@ -18,20 +18,6 @@ This will build and launch the application in a Docker container.
 
 Here are the available routes and their descriptions:
 
-### Get List of Accounts
-Retrieve a list of all accounts.
-
-`GET /accounts`
-
-    curl --location 'http://localhost:8080/accounts'
-
-### Get Account Balance
-Retrieve the balance of a specific account.
-
-`GET /accounts/id/balance`
-
-    curl --location 'http://localhost:8080/accounts/id/balance'
-
 ### Create a New Account
 Create a new account with provided details.
 
@@ -40,11 +26,25 @@ Create a new account with provided details.
     curl --location 'http://localhost:8080/accounts' \
     --header 'Content-Type: application/json' \
     --data '{
-        "name": "name",
-        "cpf": "cpf",
-        "secret": "secret"
-    }'
+        "name": "Mineiro",
+        "cpf": "31974408035",
+        "secret": "123456"
+    }' -i
     
+### Get Account Balance
+Retrieve the balance of a specific account.
+
+`GET /accounts/id/balance`
+
+    curl --location 'http://localhost:8080/accounts/1/balance' -i
+
+### Get List of Accounts
+Retrieve a list of all accounts.
+
+`GET /accounts`
+
+    curl --location 'http://localhost:8080/accounts' -i
+
 ### Get Token for Account
 Authenticate and retrieve a token for the account.
 
@@ -53,17 +53,9 @@ Authenticate and retrieve a token for the account.
     curl --location 'http://localhost:8080/login' \
     --header 'Content-Type: application/json' \
     --data '{
-        "cpf": "cpf",
-        "secret": "secret"
-    }'
-
-### Get List of Transfers
-Retrieve a list of transfers for an authenticated account.
-
-`GET /transfers`
-
-    curl --location 'http://localhost:8080/transfers' \
-    --header 'Authorization: Bearer TOKEN'
+        "cpf": "31974408035",
+        "secret": "123456"
+    }' -i
 
 ### Create a Transfer
 Create a new transfer between accounts.
@@ -74,6 +66,14 @@ Create a new transfer between accounts.
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer TOKEN' \
     --data '{
-        "account_destination_id": account_destination_id,
-        "amount": amount
-    }'
+        "account_destination_id": 2,
+        "amount": 10
+    }' -i
+
+### Get List of Transfers
+Retrieve a list of transfers for an authenticated account.
+
+`GET /transfers`
+
+    curl --location 'http://localhost:8080/transfers' \
+    --header 'Authorization: Bearer TOKEN' -i
